@@ -6,6 +6,8 @@ import Projects from "@/components/Projects";
 import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
 import WhyUs from "@/components/WhyUs";
+import Banner from "@/components/banner";
+import Footer from "@/components/layouts/Footer";
 
 export default async function Home( { params } ) {
   const { locale } = await params;
@@ -19,6 +21,8 @@ export default async function Home( { params } ) {
       <About />
       <WhyUs />
       <Testimonials />
+      <Banner locale={locale} />
+      <Footer locale={locale} />
     </>
   );
 }
