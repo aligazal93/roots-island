@@ -7,8 +7,6 @@ export default async function LocaleLayout({ children, params }) {
   return (
     <div dir={locale === "ar" ? "rtl" : "ltr"} lang={locale}>
       {children}
-      <Banner locale={locale} />
-      <Footer locale={locale} />
     </div>
   );
 }
