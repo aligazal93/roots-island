@@ -28,7 +28,7 @@ export default function ChangeLanguagePage({
         isScrolled ? "text-secondary" : "text-secondary"
       }`}
     >
-      {locale === "ar" ? "En" : "Ar"}
+      {locale === "ar" ? "En" : "عـربـي"}
 
         <Image
           src="/images/lang-2.png"

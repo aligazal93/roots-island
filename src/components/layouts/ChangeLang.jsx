@@ -28,7 +28,7 @@ export default function ChangeLanguage({
         isScrolled ? "text-secondary" : "text-white"
       }`}
     >
-      {locale === "ar" ? "En" : "Ar"}
+      {locale === "ar" ? "En" : "عـربـي"}
 
       {isScrolled ? (
         <Image

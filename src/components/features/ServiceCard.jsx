@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function ServiceCard({ name, description, pic }) {
+export default function ServiceCard({ name, description, locale , id ,pic }) {
   return (
     <div className="overflow-hidden rounded-[18px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
       <img src={pic} alt="" className="h-[200px] w-full object-cover" />
@@ -15,7 +15,7 @@ export default function ServiceCard({ name, description, pic }) {
         </p>
         <Link
           className="my-4 justify-center items-center flex px-4 gap-2 text-custom14 font-bold text-primary"
-          href="/"
+          href={`/${locale}/services/${id}`}
         >
             عرض التفاصيل
           <Image

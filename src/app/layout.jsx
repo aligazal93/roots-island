@@ -1,5 +1,7 @@
 import { Rubik } from "next/font/google";
 import "./globals.css";
+import Banner from "@/components/banner";
+import Footer from "@/components/layouts/Footer";
 
 export const rubik = Rubik({
   subsets: ["latin"],
@@ -16,7 +18,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html suppressHydrationWarning>
-      <body className={rubik.className}>{children}</body>
+      <body className={rubik.className}>
+        {children}
+      </body>
     </html>
   );
 }

@@ -21,8 +21,8 @@ export default async function Home( { params } ) {
       <About />
       <WhyUs />
       <Testimonials />
-      <Banner locale={locale} />
-      <Footer locale={locale} />
+      {/* <Banner locale={locale} /> */}
+      {/* <Footer locale={locale} /> */}
     </>
   );
 }

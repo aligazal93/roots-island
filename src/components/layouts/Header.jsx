@@ -85,7 +85,7 @@ export default function Header({ locale }) {
                     </Link>
 
                     <Link
-                     href={`/${locale}/services`}
+                      href={`/${locale}/services`}
                       className="flex items-center px-6 py-4 text-[14px] font-[700] text-secondary hover:bg-[#F8F8F8] hover:text-primary transition-all duration-300"
                     >
                       التصميم الخارجي
@@ -95,7 +95,7 @@ export default function Header({ locale }) {
               </li>
               <li>
                 <Link
-                  href="/"
+                  href={`/${locale}/projects`}
                   className={`text-custom18 font-[500] duration-300 transition-all hover:text-primary ${
                     isScrolled ? "text-secondary" : "text-white"
                   }`}
@@ -105,7 +105,7 @@ export default function Header({ locale }) {
               </li>
               <li>
                 <Link
-                  href="/ar/about-us"
+                   href={`/${locale}/about-us`}
                   className={`text-custom18 font-[500] duration-300 transition-all hover:text-primary ${
                     isScrolled ? "text-secondary" : "text-white"
                   }`}
@@ -159,7 +159,7 @@ export default function Header({ locale }) {
                 <ChangeLanguage locale={locale} isScrolled={isScrolled} />
               </li>
               <li>
-                <button className="flex items-center bg-primary text-white gap-2 text-custom14 duration-300 transition-all hover:bg-secondary font-[500] py-2 px-8 rounded-[8px]">
+                <Link  href={`/${locale}/contact-us`} className="flex items-center bg-primary text-white gap-2 text-custom14 duration-300 transition-all hover:bg-secondary font-[500] py-2 px-8 rounded-[8px]">
                   <Image
                     src="/images/call.png"
                     width={20}
@@ -167,9 +167,8 @@ export default function Header({ locale }) {
                     alt="lang"
                     priority
                   />{" "}
-                                  {dict.contactUs}
-
-                </button>{" "}
+                  {dict.contactUs}
+                </Link>{" "}
               </li>
             </ul>
           </div>

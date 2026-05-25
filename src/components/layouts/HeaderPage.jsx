@@ -97,7 +97,7 @@ export default function HeaderPage({ locale }) {
               </li>
               <li>
                 <Link
-                  href={`/${locale}/services`}
+                  href={`/${locale}/projects`}
                   className={`md:text-custom14 lg:text-[18px] font-[500] duration-300 transition-all hover:text-primary ${
                     isScrolled ? "text-secondary" : "text-secondary"
                   }`}
@@ -146,7 +146,7 @@ export default function HeaderPage({ locale }) {
                 <ChangeLanguagePage locale={locale} isScrolled={isScrolled} />
               </li>
               <li>
-                <button className="flex items-center bg-primary text-white gap-2 text-custom14 duration-300 transition-all hover:bg-secondary font-[500] py-2 px-8 rounded-[8px]">
+                <Link  href={`/${locale}/contact-us`} className="flex items-center bg-primary text-white gap-2 text-custom14 duration-300 transition-all hover:bg-secondary font-[500] py-2 px-8 rounded-[8px]">
                   <Image
                     src="/images/call.png"
                     width={20}
@@ -155,7 +155,7 @@ export default function HeaderPage({ locale }) {
                     priority
                   />{" "}
                   {dict.contactUs}
-                </button>{" "}
+                </Link>{" "}
               </li>
             </ul>
           </div>
