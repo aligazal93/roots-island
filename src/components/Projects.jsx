@@ -151,7 +151,7 @@ export default function Projects() {
                   الطابع الجمالي والبيئة المحيطة للمشروع.{" "}
                 </p>
                 <Link
-                  className="my-4  items-center flex px-4 pb-8 font-[700] gap-2 text-custom18 font-bold text-primary"
+                  className="my-4  items-center flex px-4 pb-8 font-[700] gap-2 text-custom18 text-primary"
                   href="/"
                 >
                   {" "}

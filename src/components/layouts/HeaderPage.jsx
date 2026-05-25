@@ -161,7 +161,7 @@ export default function HeaderPage({ locale }) {
           </div>
         </div>
       </header>
-      <Sidenav open={open} setOpen={setOpen} />
+      <Sidenav open={open} locale={locale} setOpen={setOpen} />
     </>
   );
 }

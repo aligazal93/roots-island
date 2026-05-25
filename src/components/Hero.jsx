@@ -2,8 +2,10 @@ import Image from "next/image";
 import React from "react";
 import AnimatedDiv from "./AnimateDiv";
 import StatsBox from "./features/StatesBox";
+import Link from "next/link";
 
-export default function Hero() {
+export default function Hero({locale}) {
+
   return (
     <section
       className="relative mt-[-200px] min-h-screen bg-cover bg-center bg-no-repeat"
@@ -34,7 +36,7 @@ export default function Hero() {
               بخبرة تنفيذية تغطي المشاريع السكنية، التجارية، والوجهات الفاخرة.
             </p>
             <div className="flex gap-4 items-center justify-center my-8">
-              <button className="flex items-center border border-primary hover:border-secondary duration-300 transition-all hover:bg-secondary py-2 px-8 gap-4 rounded-[12px]">
+              <Link href={`/${locale}/projects`} className="flex items-center border border-primary hover:border-secondary duration-300 transition-all hover:bg-secondary py-2 px-8 gap-4 rounded-[12px]">
                 استكاف مشاريعنا{" "}
                 <Image
                   src="/images/arrow.png"
@@ -42,10 +44,10 @@ export default function Hero() {
                   width={14}
                   height={14}
                 />
-              </button>
-              <button className="text-white bg-primary duration-300 transition-all hover:bg-secondary py-2 px-8  rounded-[12px]">
+              </Link>
+              <Link href={`/${locale}/contact-us`}  className="text-white bg-primary duration-300 transition-all hover:bg-secondary py-2 px-8  rounded-[12px]">
                 تواصل معنا
-              </button>
+              </Link>
             </div>
           </AnimatedDiv>
         </div>

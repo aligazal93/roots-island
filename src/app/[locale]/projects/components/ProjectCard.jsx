@@ -17,22 +17,22 @@ export default async function ProjectCard({
         height={200}
         src={pic}
         alt="Project 1"
-        className="w-full object-cover"
+        className="w-full object-cover h-[160px] lg:h-[300px]"
       />
-      <span className="absolute right-4 top-4 flex items-center justify-center gap-[10px] rounded-[30px] border border-[rgba(86,158,73,0.5)] bg-[rgba(86,158,73,0.7)] px-6 py-1 text-custom14 font-bold text-white">
+      <span className="absolute right-4 top-4 flex items-center justify-center gap-[10px] rounded-[30px] border border-[rgba(86,158,73,0.5)] bg-[rgba(86,158,73,0.7)] px-6 py-1 text-custom12 lg:text-custom14 font-bold text-white">
         {categoryName}
       </span>
       <Link
-        className="block line-clamp-1 h-[62px] overflow-hidden px-4 py-4 text-custom20 font-bold text-secondary"
+        className="block line-clamp-1 h-[62px] overflow-hidden px-4 py-4 text-custom14 md:text-custom14 lg:text-custom20 font-bold text-secondary"
         href={`/${locale}/projects/${id}`}
       >
         {name}
       </Link>
-      <p className="text-custom16 line-clamp-2 px-4 leading-relaxed text-blackGrey">
+      <p className="text-custom14 lg:text-custom16 line-clamp-2 px-4 leading-relaxed text-blackGrey">
         {description}
       </p>
       <Link
-        className="my-4  items-center flex px-4 pb-8  gap-2 text-custom18 font-bold text-primary"
+        className="my-4  items-center flex px-4 pb-8  gap-2 text-custom14 lg:text-custom18 font-bold text-primary"
         href={`/${locale}/projects/${id}`}
       >
         استكشف مشاريعنا{" "}
