@@ -4,7 +4,7 @@ import AnimatedDiv from "./AnimateDiv";
 
 export default function Banner() {
   return (
-       <AnimatedDiv delay={1}>
+       <AnimatedDiv delay={0.5}>
               <div className="container relative">
         <div className="grid grid-cols-12 gap-4">
           <div className="col-span-12">
