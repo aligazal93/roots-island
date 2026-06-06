@@ -15,7 +15,7 @@ export default async function Home( { params } ) {
     <>
       <Header locale={locale} />
       <Hero locale={locale} />
-      <Brands />
+      <Brands locale={locale} />
       <Services />
       <Projects />
       <About />

@@ -28,6 +28,7 @@ export default async function ProjectCard({
       >
         {name}
       </Link>
+      
       <p className="text-custom14 lg:text-custom16 line-clamp-2 px-4 leading-relaxed text-blackGrey">
         {description}
       </p>

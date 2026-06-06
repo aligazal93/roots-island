@@ -1,5 +1,7 @@
 "use client";
 
+import { setLang } from "@/utils/lang";
+import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -9,16 +11,18 @@ export default function ChangeLanguagePage({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
-  const handleChangeLanguage = () => {
+
+   const handleChangeLanguage = () => {
     const newLocale = locale === "ar" ? "en" : "ar";
 
-    const newPath = pathname.replace(
-      `/${locale}`,
-      `/${newLocale}`
-    );
+    setLang(newLocale); // 👈 هنا المهم
 
+    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
     router.push(newPath);
+
+    queryClient.invalidateQueries(); // 👈 reload all data
   };
 
   return (

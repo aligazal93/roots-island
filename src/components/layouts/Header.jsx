@@ -9,12 +9,14 @@ import Sidenav from "./Sidenav";
 import { useParams } from "next/navigation";
 import ChangeLanguage from "./ChangeLang";
 import { getDictionary } from "@/utils/getDictionary";
+import { useSettings } from "@/hooks/settings";
+import LoadingCard from "./LoadingCard";
+import ErrorState from "./ErrorBox";
 
 export default function Header({ locale }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const dict = getDictionary(locale);
-
   useEffect(() => {
     const onScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -26,6 +28,14 @@ export default function Header({ locale }) {
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const { data, isLoading, error, refetch } = useSettings(locale);
+
+  {
+    error && (
+      <ErrorState message={error.message} onRetry={refetch} locale={locale} />
+    );
+  }
 
   return (
     <>
@@ -105,7 +115,7 @@ export default function Header({ locale }) {
               </li>
               <li>
                 <Link
-                   href={`/${locale}/about-us`}
+                  href={`/${locale}/about-us`}
                   className={`text-custom18 font-[500] duration-300 transition-all hover:text-primary ${
                     isScrolled ? "text-secondary" : "text-white"
                   }`}
@@ -120,23 +130,18 @@ export default function Header({ locale }) {
               className="flex items-center w-full lg:justify-center justify-between gap-4"
             >
               <Link href="/">
-                {isScrolled ? (
-                  <Image
-                    src="/images/logo-2.png"
-                    width={90}
-                    height={90}
-                    alt="Roots logo"
-                    priority
-                    className="duration-300 transition-all hover:scale-110"
-                  />
+                {isLoading ? (
+                  <div className="w-[90px] h-[90px] bg-gray-200 animate-pulse rounded" />
                 ) : (
                   <Image
-                    src="/images/logo.png"
+                    src={
+                      isScrolled
+                        ? data?.data?.header_logo
+                        : data?.data?.footer_logo
+                    }
                     width={90}
                     height={90}
                     alt="Roots logo"
-                    priority
-                    className="duration-300 transition-all hover:scale-110"
                   />
                 )}
               </Link>
@@ -159,7 +164,10 @@ export default function Header({ locale }) {
                 <ChangeLanguage locale={locale} isScrolled={isScrolled} />
               </li>
               <li>
-                <Link  href={`/${locale}/contact-us`} className="flex items-center bg-primary text-white gap-2 text-custom14 duration-300 transition-all hover:bg-secondary font-[500] py-2 px-8 rounded-[8px]">
+                <Link
+                  href={`/${locale}/contact-us`}
+                  className="flex items-center bg-primary text-white gap-2 text-custom14 duration-300 transition-all hover:bg-secondary font-[500] py-2 px-8 rounded-[8px]"
+                >
                   <Image
                     src="/images/call.png"
                     width={20}

@@ -1,6 +1,6 @@
-import Image from "next/image";
-import React from "react";
-import AnimatedDiv from "./AnimateDiv";
+import Image from 'next/image';
+import React from 'react';
+import AnimatedDiv from './AnimateDiv';
 
 export default function About() {
   return (
@@ -15,98 +15,81 @@ export default function About() {
             </AnimatedDiv>
 
             <AnimatedDiv delay={1}>
-            <h2 className="text-custom24 font-bold leading-relaxed text-[#044446]">
-              خبرة راسخة في تشكيل المشهد الخارجي
-            </h2>
+              <h2 className="text-custom24  text- font-bold leading-relaxed text-[#044446]">
+                خبرة راسخة في تشكيل المشهد الخارجي
+              </h2>
             </AnimatedDiv>
 
             <AnimatedDiv delay={1.5}>
+              <p className="mt-4 text-custom16 leading-relaxed text-blackGrey ">
+                منذ أكثر من 25 عامًا، تقود Roots Landscape مجال تصميم وتنفيذ اللاندسكيب في
+                المملكة العربية السعودية، بخبرة تجمع بين الإبداع المعماري والدقة الهندسية،
+                مع التزام بأعلى معايير الجودة والاستدامة في كل مشروع.
+              </p>
 
-            <p className="mt-4 text-custom16 leading-relaxed text-blackGrey">
-              منذ أكثر من 25 عامًا، تقود Roots Landscape مجال تصميم وتنفيذ
-              اللاندسكيب في المملكة العربية السعودية، بخبرة تجمع بين الإبداع
-              المعماري والدقة الهندسية، مع التزام بأعلى معايير الجودة والاستدامة
-              في كل مشروع.
-            </p>
-
-            <p className="mt-4 text-custom16 leading-relaxed text-blackGrey">
-              نفخر بكوننا شركاء استراتيجيين لكبرى مشاريع التطوير العقاري والبنية
-              التحتية، مع فريق يضم أكثر من 200 مهندس وفني متخصص يعملون على تحويل
-              الرؤى الطموحة إلى واقع ملموس.
-            </p>
-
+              <p className="mt-4 text-custom16 leading-relaxed text-blackGrey">
+                نفخر بكوننا شركاء استراتيجيين لكبرى مشاريع التطوير العقاري والبنية
+                التحتية، مع فريق يضم أكثر من 200 مهندس وفني متخصص يعملون على تحويل الرؤى
+                الطموحة إلى واقع ملموس.
+              </p>
             </AnimatedDiv>
-
-
 
             <div className="mt-10 grid gap-2 sm:grid-cols-2">
               <AnimatedDiv delay={2}>
-              <div className="rounded-[18px] border border-[#E5E7EB] p-4">
-                <div className="mb-2 flex justify-start">
-                  <img src="/images/icon-1.png" alt="" className="w-6" />
+                <div className="rounded-[18px] border border-[#E5E7EB] p-4">
+                  <div className="mb-2 flex justify-start">
+                    <img src="/images/icon-1.png" alt="" className="w-6" />
+                  </div>
+
+                  <h3 className="text-custom20 font-bold text-secondary">الجودة</h3>
+
+                  <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
+                    معايير تنفيذ احترافية تضمن استدامة المشروع
+                  </p>
                 </div>
-
-                <h3 className="text-custom20 font-bold text-secondary">
-                  الجودة
-                </h3>
-
-                <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
-                  معايير تنفيذ احترافية تضمن استدامة المشروع
-                </p>
-              </div>
               </AnimatedDiv>
 
               <AnimatedDiv delay={2}>
-                
-              <div className="rounded-[18px] border border-[#E5E7EB] p-4">
-                <div className="mb-2 flex justify-start">
-                  <img src="/images/icon-2.png" alt="" className="w-6" />
+                <div className="rounded-[18px] border border-[#E5E7EB] p-4">
+                  <div className="mb-2 flex justify-start">
+                    <img src="/images/icon-2.png" alt="" className="w-6" />
+                  </div>
+
+                  <h3 className="text-custom20 font-bold text-secondary">الاستدامة</h3>
+
+                  <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
+                    معايير تنفيذ احترافية تضمن استدامة المشروع
+                  </p>
                 </div>
-
-                <h3 className="text-custom20 font-bold text-secondary">
-                  الاستدامة
-                </h3>
-
-                <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
-                  معايير تنفيذ احترافية تضمن استدامة المشروع
-                </p>
-              </div>
               </AnimatedDiv>
 
               <AnimatedDiv delay={2}>
-                              <div className="rounded-[18px] border border-[#E5E7EB] p-4">
-                <div className="mb-2 flex justify-start">
-                  <img src="/images/icon-3.png" alt="" className="w-6" />
+                <div className="rounded-[18px] border border-[#E5E7EB] p-4">
+                  <div className="mb-2 flex justify-start">
+                    <img src="/images/icon-3.png" alt="" className="w-6" />
+                  </div>
+
+                  <h3 className="text-custom20 font-bold text-secondary">الدقة</h3>
+
+                  <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
+                    معايير تنفيذ احترافية تضمن استدامة المشروع
+                  </p>
                 </div>
-
-                <h3 className="text-custom20 font-bold text-secondary">
-                  الدقة
-                </h3>
-
-                <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
-                  معايير تنفيذ احترافية تضمن استدامة المشروع
-                </p>
-              </div>
               </AnimatedDiv>
 
+              <AnimatedDiv delay={2.5}>
+                <div className="rounded-[18px] border border-[#E5E7EB] p-4">
+                  <div className="mb-2 flex justify-start">
+                    <img src="/images/icon-4.png" alt="" className="w-6" />
+                  </div>
 
-            <AnimatedDiv delay={2.5}>
-                            <div className="rounded-[18px] border border-[#E5E7EB] p-4">
-                <div className="mb-2 flex justify-start">
-                  <img src="/images/icon-4.png" alt="" className="w-6" />
+                  <h3 className="text-custom20 font-bold text-secondary">الابتكار</h3>
+
+                  <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
+                    معايير تنفيذ احترافية تضمن استدامة المشروع
+                  </p>
                 </div>
-
-                <h3 className="text-custom20 font-bold text-secondary">
-                  الابتكار
-                </h3>
-
-                <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
-                  معايير تنفيذ احترافية تضمن استدامة المشروع
-                </p>
-              </div>
-            </AnimatedDiv>
-
-
+              </AnimatedDiv>
             </div>
           </div>
 

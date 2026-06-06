@@ -3,7 +3,7 @@ import AnimatedDiv from "./AnimateDiv";
 
 export default function Services() {
   return (
-    <section className="bg-white py-20" dir="rtl">
+    <section className="bg-white pb-[50px]" dir="rtl">
       <div className="container mx-auto px-4">
         <div className="mb-12 text-center">
           <span className="mb-4 inline-block rounded-full bg-[#569E49]/20 px-6 py-2 text-custom12 font-bold text-[#569E49]">
