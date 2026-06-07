@@ -1,8 +1,18 @@
-import Image from 'next/image';
-import React from 'react';
-import AnimatedDiv from './AnimateDiv';
+"use client";
+import Image from "next/image";
+import React from "react";
+import AnimatedDiv from "./AnimateDiv";
+import { useAboutUs } from "@/hooks/main-content/about-us";
+import { getDictionary } from "@/utils/getDictionary";
+import LoadingCard from "./layouts/LoadingCard";
+import ErrorState from "./layouts/ErrorBox";
+import Link from "next/link";
 
-export default function About() {
+export default function About({ locale }) {
+  const dict = getDictionary(locale);
+  const { data, isLoading, error } = useAboutUs(locale);
+  if (isLoading) return <LoadingCard />;
+  if (error) return <ErrorState />;
   return (
     <section className="relative overflow-hidden py-24" dir="rtl">
       <div className="container mx-auto px-4">
@@ -16,80 +26,42 @@ export default function About() {
 
             <AnimatedDiv delay={1}>
               <h2 className="text-custom24  text- font-bold leading-relaxed text-[#044446]">
-                خبرة راسخة في تشكيل المشهد الخارجي
+                {data?.data?.about_us?.title}
               </h2>
             </AnimatedDiv>
 
             <AnimatedDiv delay={1.5}>
               <p className="mt-4 text-custom16 leading-relaxed text-blackGrey ">
-                منذ أكثر من 25 عامًا، تقود Roots Landscape مجال تصميم وتنفيذ اللاندسكيب في
-                المملكة العربية السعودية، بخبرة تجمع بين الإبداع المعماري والدقة الهندسية،
-                مع التزام بأعلى معايير الجودة والاستدامة في كل مشروع.
-              </p>
-
-              <p className="mt-4 text-custom16 leading-relaxed text-blackGrey">
-                نفخر بكوننا شركاء استراتيجيين لكبرى مشاريع التطوير العقاري والبنية
-                التحتية، مع فريق يضم أكثر من 200 مهندس وفني متخصص يعملون على تحويل الرؤى
-                الطموحة إلى واقع ملموس.
+                {data?.data?.about_us?.description}
               </p>
             </AnimatedDiv>
 
             <div className="mt-10 grid gap-2 sm:grid-cols-2">
-              <AnimatedDiv delay={2}>
-                <div className="rounded-[18px] border border-[#E5E7EB] p-4">
-                  <div className="mb-2 flex justify-start">
-                    <img src="/images/icon-1.png" alt="" className="w-6" />
+              {data?.data?.items?.map((data , index) => (
+                <AnimatedDiv delay={2} key={index}>
+                  <div className="rounded-[18px] border border-[#E5E7EB] p-4">
+                    <div className="mb-2 flex justify-start">
+                      <Link href="#">
+                        <Image
+                          src={data?.icon}
+                          alt="icon"
+                          width={24}
+                          height={24}
+                          className="w-6"
+                        />
+                      </Link>
+                    </div>
+
+                    <h3 className="text-custom20 font-bold text-secondary">
+                      {data?.title}
+                    </h3>
+
+                    <p className="mt-2 h-[45px] overflow-hidden text-custom14 leading-relaxed text-blackGrey">
+                      {data?.description}
+                    </p>
                   </div>
-
-                  <h3 className="text-custom20 font-bold text-secondary">الجودة</h3>
-
-                  <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
-                    معايير تنفيذ احترافية تضمن استدامة المشروع
-                  </p>
-                </div>
-              </AnimatedDiv>
-
-              <AnimatedDiv delay={2}>
-                <div className="rounded-[18px] border border-[#E5E7EB] p-4">
-                  <div className="mb-2 flex justify-start">
-                    <img src="/images/icon-2.png" alt="" className="w-6" />
-                  </div>
-
-                  <h3 className="text-custom20 font-bold text-secondary">الاستدامة</h3>
-
-                  <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
-                    معايير تنفيذ احترافية تضمن استدامة المشروع
-                  </p>
-                </div>
-              </AnimatedDiv>
-
-              <AnimatedDiv delay={2}>
-                <div className="rounded-[18px] border border-[#E5E7EB] p-4">
-                  <div className="mb-2 flex justify-start">
-                    <img src="/images/icon-3.png" alt="" className="w-6" />
-                  </div>
-
-                  <h3 className="text-custom20 font-bold text-secondary">الدقة</h3>
-
-                  <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
-                    معايير تنفيذ احترافية تضمن استدامة المشروع
-                  </p>
-                </div>
-              </AnimatedDiv>
-
-              <AnimatedDiv delay={2.5}>
-                <div className="rounded-[18px] border border-[#E5E7EB] p-4">
-                  <div className="mb-2 flex justify-start">
-                    <img src="/images/icon-4.png" alt="" className="w-6" />
-                  </div>
-
-                  <h3 className="text-custom20 font-bold text-secondary">الابتكار</h3>
-
-                  <p className="mt-2 text-custom14 leading-relaxed text-blackGrey">
-                    معايير تنفيذ احترافية تضمن استدامة المشروع
-                  </p>
-                </div>
-              </AnimatedDiv>
+                </AnimatedDiv>
+              ))}
             </div>
           </div>
 
@@ -105,9 +77,10 @@ export default function About() {
 
               <div className="relative z-10 overflow-hidden rounded-[28px]">
                 <Image
-                  src="/images/about.png"
+                  src={data?.data?.about_us?.image || ""}
                   alt="about"
                   width={700}
+                  quality={100}
                   height={900}
                   className="h-[600px] w-[540px] object-cover"
                 />

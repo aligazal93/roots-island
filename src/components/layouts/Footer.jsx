@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -9,9 +10,16 @@ import {
 } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
 import AnimatedDiv from "../AnimateDiv";
+import { useSettings } from "@/hooks/settings";
 
 export default function Footer({ locale }) {
   const currentLocale = locale || "ar";
+  const { data, isLoading, error, refetch } = useSettings(locale);
+  {
+    error && (
+      <ErrorState message={error.message} onRetry={refetch} locale={locale} />
+    );
+  }
 
   return (
     <footer className="mt-[-100px] bg-darkBorder pb-[15px] pt-[150px]">
@@ -20,34 +28,55 @@ export default function Footer({ locale }) {
           <div className="flex w-full flex-col gap-6 pb-6 md:flex-row md:items-center md:justify-between">
             <Link href={`/${currentLocale}`} aria-label="Roots home">
               <Image
-                src="/images/logo-footer.png"
+                src={data?.data?.footer_logo || "/images/logo-footer.png"}
                 alt="Roots Landscape"
                 width={180}
                 height={90}
                 className="mx-auto h-auto max-w-[180px] md:mx-0"
               />
             </Link>
-
             <ul className="flex items-center justify-center gap-4">
               {[
-                { icon: FaFacebookF, label: "Facebook" },
-                { icon: RiTwitterXFill, label: "X" },
-                { icon: FaInstagram, label: "Instagram" },
-                { icon: FaSnapchatGhost, label: "Snapchat" },
-                { icon: FaTiktok, label: "TikTok" },
-              ].map(({ icon: Icon, label }) => (
-                <li key={label}>
-                  <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-white/10 text-white transition-all duration-300 hover:bg-primary"
-                  >
-                    <Icon size={17} />
-                  </a>
-                </li>
-              ))}
+                {
+                  icon: FaFacebookF,
+                  label: "Facebook",
+                  link: data?.data?.socials?.facebook,
+                },
+                {
+                  icon: RiTwitterXFill,
+                  label: "X",
+                  link: data?.data?.socials?.x,
+                },
+                {
+                  icon: FaInstagram,
+                  label: "Instagram",
+                  link: data?.data?.socials?.instagram,
+                },
+                {
+                  icon: FaSnapchatGhost,
+                  label: "Snapchat",
+                  link: data?.data?.socials?.snapchat,
+                },
+                {
+                  icon: FaTiktok,
+                  label: "TikTok",
+                  link: data?.data?.socials?.tiktok,
+                },
+              ]
+                .filter((item) => item.link)
+                .map(({ icon: Icon, label, link }) => (
+                  <li key={label}>
+                    <Link
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-white/10 text-white transition-all duration-300 hover:bg-primary"
+                    >
+                      <Icon size={17} />
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
         </AnimatedDiv>
@@ -58,9 +87,9 @@ export default function Footer({ locale }) {
               شركة روتس لاندسكيب
             </h2>
 
-            <p className="max-w-md text-custom14 font-[400] leading-8 text-white">
-              رواد تصميم وتنفيذ مشاريع اللاندسكيب والإنشاءات الخارجية في المملكة
-              العربية السعودية. نصنع المساحات التي تلهم.
+            <p className="max-w-md text-custom14 font-[400] leading-relaxed text-white">
+              {data?.data?.company_description}
+
             </p>
           </div>
 
@@ -144,13 +173,13 @@ export default function Footer({ locale }) {
                     className="shrink-0 object-contain"
                   />
 
-                  <span dir="ltr">+966 5512345678</span>
+                  <span dir="ltr">{data?.data?.phone}</span>
                 </a>
               </li>
 
               <li>
                 <a
-                  href="mailto:info@gmail.com"
+                  href={`mailto:${data?.data?.contact_email}`}
                   className="flex items-center gap-3 text-custom14 font-[500] text-white transition-all duration-300 hover:text-primary"
                 >
                   <Image
@@ -161,7 +190,7 @@ export default function Footer({ locale }) {
                     className="shrink-0 object-contain"
                   />
 
-                  <span>info@gmail.com</span>
+                  <span>{data?.data?.contact_email}</span>
                 </a>
               </li>
 
@@ -174,7 +203,21 @@ export default function Footer({ locale }) {
                   className="mt-1 shrink-0 object-contain"
                 />
                 <span>
-                  الرياض - جدة - المدينة، <br /> المملكة العربية السعودية
+                  {data?.data?.location}
+                </span>
+              </li>
+
+
+                            <li className="flex items-start gap-3 text-custom14 font-[500] leading-7 text-white">
+                <Image
+                  src="/images/time.png"
+                  alt=""
+                  width={22}
+                  height={22}
+                  className="mt-1 shrink-0 object-contain"
+                />
+                <span>
+                  {data?.data?.working_hours}
                 </span>
               </li>
             </ul>

@@ -16,11 +16,11 @@ export default async function Home( { params } ) {
       <Header locale={locale} />
       <Hero locale={locale} />
       <Brands locale={locale} />
-      <Services />
-      <Projects />
-      <About />
-      <WhyUs />
-      <Testimonials />
+      <Services locale={locale} />
+      <Projects locale={locale} />
+      <About locale={locale} />
+      <WhyUs locale={locale} />
+      <Testimonials locale={locale} />
       {/* <Banner locale={locale} /> */}
       {/* <Footer locale={locale} /> */}
     </>

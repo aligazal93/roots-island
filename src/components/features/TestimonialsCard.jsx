@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TestimonialsCard({ comment, clientName, clientPosition, rating }) {
+export default function TestimonialsCard({ comment, clientName, clientPosition }) {
 
   return (
     <div className="relative border border-[#F2F3F2] rounded-[12px] p-4 md:p-10 bg-white pt-[0px]">

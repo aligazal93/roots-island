@@ -30,7 +30,6 @@ export default function Header({ locale }) {
   }, []);
 
   const { data, isLoading, error, refetch } = useSettings(locale);
-
   {
     error && (
       <ErrorState message={error.message} onRetry={refetch} locale={locale} />

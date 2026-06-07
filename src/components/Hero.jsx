@@ -11,8 +11,8 @@ import { getDictionary } from "@/utils/getDictionary";
 
 export default function Hero({ locale }) {
   const { data, isLoading, error } = useMainContent(locale);
-    const dict = getDictionary(locale);
-  
+  const dict = getDictionary(locale);
+
   if (isLoading) return <FullScreenLoader />;
   if (error) {
     return (
@@ -22,8 +22,7 @@ export default function Hero({ locale }) {
     );
   }
 
-  console.log("settings:", data);
-console.log("stats:", data?.data?.stats);
+  console.log("Hero Data:", data?.data?.stats);
   return (
     <section
       className="relative mt-[-200px] min-h-screen bg-cover bg-center bg-no-repeat"
@@ -59,7 +58,7 @@ console.log("stats:", data?.data?.stats);
                 href={`/${locale}/projects`}
                 className="flex items-center border border-primary hover:border-secondary duration-300 transition-all hover:bg-secondary py-2 px-8 gap-4 rounded-[12px]"
               >
-                {dict.projects} 
+                {dict.projects}
                 <Image
                   src="/images/arrow.png"
                   alt="arrow-right"
@@ -81,7 +80,9 @@ console.log("stats:", data?.data?.stats);
       </div>
 
       <AnimatedDiv delay={0.5}>
-        <StatsBox locale={locale} />
+        {data?.data?.stats && (
+          <StatsBox locale={locale} stats={data.data.stats} />
+        )}
       </AnimatedDiv>
     </section>
   );
