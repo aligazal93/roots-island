@@ -85,7 +85,7 @@ export default function Header({ locale }) {
                         className="flex items-center px-6 py-4 text-[14px] font-[700] text-secondary hover:bg-[#F8F8F8] hover:text-primary transition-all duration-300"
                         href={`/${locale}/services/${item.id}`}
                       >
-                        {item.title} {locale} {item.id}
+                        {item.title} 
                       </Link>
                     ))}
                   </div>
