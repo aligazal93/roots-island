@@ -30,7 +30,7 @@ export default function About({ locale }) {
               </h2>
             </AnimatedDiv>
 
-            <AnimatedDiv delay={1.5}>
+            <AnimatedDiv delay={1}>
               <p className="mt-4 text-custom16 leading-relaxed text-blackGrey ">
                 {data?.data?.about_us?.description}
               </p>

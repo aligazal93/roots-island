@@ -10,11 +10,14 @@ import { useParams } from "next/navigation";
 import { getDictionary } from "@/utils/getDictionary";
 import ChangeLanguage from "./ChangeLang";
 import ChangeLanguagePage from "./ChangeLangPage";
+import { useServices } from "@/hooks/main-content/services";
 
 export default function HeaderPage({ locale }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const dict = getDictionary(locale);
+    const { data: servicesData, servicesIsLoading } = useServices(locale);
+  
 
   useEffect(() => {
     const onScroll = () => {
@@ -65,33 +68,15 @@ export default function HeaderPage({ locale }) {
 
                 <div className="absolute top-[40px] right-[-80px] min-w-[350px] opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
                   <div className="bg-white rounded-[10px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-[#F1F1F1] overflow-hidden py-0">
-                    <Link
-                      href={`/${locale}/services`}
-                      className="flex items-center px-6 py-4 text-[14px] font-[700] text-secondary hover:bg-[#F8F8F8] hover:text-primary transition-all duration-300"
-                    >
-                      حلول الهاردسكيب المتكاملة
-                    </Link>
-
-                    <Link
-                     href={`/${locale}/services`}
-                      className="flex items-center px-6 py-4 text-[14px] font-[700] text-secondary hover:bg-[#F8F8F8] hover:text-primary transition-all duration-300"
-                    >
-                      تنسيق المساحات الخضراء والزراعة
-                    </Link>
-
-                    <Link
-                     href={`/${locale}/services`}
-                      className="flex items-center px-6 py-4 text-[14px] font-[700] text-secondary hover:bg-[#F8F8F8] hover:text-primary transition-all duration-300"
-                    >
-                      الشلالات والنوافير والعناصر المائية
-                    </Link>
-
-                    <Link
-                      href={`/${locale}/services`}
-                      className="flex items-center px-6 py-4 text-[14px] font-[700] text-secondary hover:bg-[#F8F8F8] hover:text-primary transition-all duration-300"
-                    >
-                      التصميم الخارجي
-                    </Link>
+                    {servicesData?.data?.map((item) => (
+                      <Link
+                        key={item.id}
+                        className="flex items-center px-6 py-4 text-[14px] font-[700] text-secondary hover:bg-[#F8F8F8] hover:text-primary transition-all duration-300"
+                        href={`/${locale}/services/${item.id}`}
+                      >
+                        {item.title} 
+                      </Link>
+                    ))}
                   </div>
                 </div>
               </li>
