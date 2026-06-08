@@ -3,6 +3,7 @@ import "./globals.css";
 import Banner from "@/components/banner";
 import Footer from "@/components/layouts/Footer";
 import QueryProvider from "@/providers/QueryProvider";
+import { Toaster } from "sonner";
 
 export const rubik = Rubik({
   subsets: ["latin"],
@@ -20,9 +21,8 @@ export default function RootLayout({ children }) {
   return (
     <html suppressHydrationWarning>
       <body className={rubik.className}>
-        <QueryProvider>
-        {children}
-        </QueryProvider>
+        <QueryProvider>{children}</QueryProvider>
+        <Toaster position="top-center" richColors closeButton />
       </body>
     </html>
   );

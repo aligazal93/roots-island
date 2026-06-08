@@ -1,31 +1,9 @@
 import AnimatedDiv from "@/components/AnimateDiv";
-import React from "react";
-import { FaAward, FaHandshake } from "react-icons/fa";
-import { GiBrain, GiReceiveMoney } from "react-icons/gi";
+import Image from "next/image";
 
-export default function OurValues() {
-  const values = [
-    {
-      title: "الجودة",
-      desc: "نلتزم بأعلى المعايير في تنفيذ حلول احترافية عالية المستوى.",
-      icon: FaAward,
-    },
-    {
-      title: "الابتكار",
-      desc: "نستخدم أحدث التقنيات والأفكار لتطوير حلول واقعية مبتكرة وفعالة.",
-      icon: GiBrain,
-    },
-    {
-      title: "الشراكة",
-      desc: "نؤمن أن نجاح عملائنا جزء أساسي من نجاحنا.",
-      icon: FaHandshake,
-    },
-    {
-      title: "الموثوقية",
-      desc: "نلتزم بالوضوح، الاستقرار، والدعم المستمر في جميع مشاريعنا.",
-      icon: GiReceiveMoney,
-    },
-  ];
+export default function OurValues({ data }) {
+  const values = Array.isArray(data) ? data : data?.data || data?.values || [];
+
   return (
     <div className="container">
       <div className="grid grid-cols-12 gap-4">
@@ -51,17 +29,19 @@ export default function OurValues() {
       </div>
 
       <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {values.map((item, index) => {
-          const Icon = item.icon;
-
-          return (
-            <AnimatedDiv delay={1} key={index}>
-                            <div
-              
-              className="group rounded-[20px] border border-gray-100 bg-white p-8 text-center shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-xl"
-            >
-              <div className="mx-auto mb-5 flex h-[70px] w-[70px] items-center justify-center rounded-2xl text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-white">
-                <Icon className="text-[44px]" />
+        {values.map((item, index) => (
+          <AnimatedDiv delay={1} key={index}>
+            <div className="group h-full rounded-[20px] border border-gray-100 bg-white p-8 text-center shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-xl">
+              <div className="mx-auto mb-5 flex h-[76px] w-[76px] items-center justify-center rounded-2xl bg-primary/10 transition-all duration-500 group-hover:bg-primary/20">
+                {item.icon && (
+                  <Image
+                    src={item.icon}
+                    alt={item.title || "value icon"}
+                    width={44}
+                    height={44}
+                    className="h-[44px] w-[44px] object-contain"
+                  />
+                )}
               </div>
 
               <h3 className="mb-3 text-custom20 font-bold text-secondary">
@@ -69,13 +49,11 @@ export default function OurValues() {
               </h3>
 
               <p className="text-custom14 font-medium leading-7 text-blackGrey">
-                {item.desc}
+                {item.description}
               </p>
             </div>
-            </AnimatedDiv>
-
-          );
-        })}
+          </AnimatedDiv>
+        ))}
       </div>
     </div>
   );

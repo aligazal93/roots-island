@@ -1,17 +1,30 @@
 import HeaderPage from "@/components/layouts/HeaderPage";
-import React from "react";
 import Road from "../../../components/layouts/Road";
-import Image from "next/image";
-import Link from "next/link";
 import ProjectCard from "./components/ProjectCard";
 import Pagination from "@/components/layouts/Paginations";
+import { getProjects } from "@/api/projects";
 
-export default async function ProjectsPage({ params }) {
+export default async function ProjectsPage({ params, searchParams }) {
   const { locale } = await params;
+  const { page } = await searchParams;
+
+  const currentPage = Number(page) || 1;
+
+  const response = await getProjects(locale, currentPage);
+
+  const projects = response?.data || [];
+  const pagination = response?.additionalData?.pagination;
+
+  if (!projects.length) return null;
+
+  const totalPages = Math.ceil(
+    pagination.total / pagination.per_page
+  );
 
   return (
     <>
       <HeaderPage locale={locale} />
+
       <Road
         name="مشاريعنا"
         items={[
@@ -19,88 +32,32 @@ export default async function ProjectsPage({ params }) {
           { label: "مشاريعنا", href: `/${locale}/projects` },
         ]}
       />
-      <section className="mt-[30px]">
+
+      <section className="mt-[30px] mb-[100px]">
         <div className="container">
-          <div className="grid grid-cols-2 gap-4">
-            <ProjectCard
-              categoryName="أعمال اللاندسكيب"
-              id={1}
-              name="مشروع ديرعية جيت – هيئة تطوير بوابة الدرعية"
-              description="تنفيذ أعمال تنسيق المواقع ضمن واحد من أهم المشاريع التراثية والسياحية في المملكة، مع الحفاظ على الطابع النجدي التاريخي ودمجه مع حلول لاندسكيب حديثة ومستدامة."
-              pic="/images/proj-1.png"
-              locale={locale}
-            />
-
-            <ProjectCard
-              categoryName="أعمال اللاندسكيب"
-              id={1}
-              name="مشروع ديرعية جيت – هيئة تطوير بوابة الدرعية"
-              description="تنفيذ أعمال تنسيق المواقع ضمن واحد من أهم المشاريع التراثية والسياحية في المملكة، مع الحفاظ على الطابع النجدي التاريخي ودمجه مع حلول لاندسكيب حديثة ومستدامة."
-              pic="/images/proj-1.png"
-              locale={locale}
-            />
-
-            <ProjectCard
-              categoryName="أعمال اللاندسكيب"
-              id={1}
-              name="مشروع ديرعية جيت – هيئة تطوير بوابة الدرعية"
-              description="تنفيذ أعمال تنسيق المواقع ضمن واحد من أهم المشاريع التراثية والسياحية في المملكة، مع الحفاظ على الطابع النجدي التاريخي ودمجه مع حلول لاندسكيب حديثة ومستدامة."
-              pic="/images/proj-1.png"
-              locale={locale}
-            />
-
-            <ProjectCard
-              categoryName="أعمال اللاندسكيب"
-              locale={locale}
-              id={1}
-              name="مشروع ديرعية جيت – هيئة تطوير بوابة الدرعية"
-              description="تنفيذ أعمال تنسيق المواقع ضمن واحد من أهم المشاريع التراثية والسياحية في المملكة، مع الحفاظ على الطابع النجدي التاريخي ودمجه مع حلول لاندسكيب حديثة ومستدامة."
-              pic="/images/proj-1.png"
-            />
-
-            <ProjectCard
-              categoryName="أعمال اللاندسكيب"
-              locale={locale}
-              id={1}
-              name="مشروع ديرعية جيت – هيئة تطوير بوابة الدرعية"
-              description="تنفيذ أعمال تنسيق المواقع ضمن واحد من أهم المشاريع التراثية والسياحية في المملكة، مع الحفاظ على الطابع النجدي التاريخي ودمجه مع حلول لاندسكيب حديثة ومستدامة."
-              pic="/images/proj-1.png"
-            />
-
-            <ProjectCard
-              categoryName="أعمال اللاندسكيب"
-              id={1}
-              locale={locale}
-              name="مشروع ديرعية جيت – هيئة تطوير بوابة الدرعية"
-              description="تنفيذ أعمال تنسيق المواقع ضمن واحد من أهم المشاريع التراثية والسياحية في المملكة، مع الحفاظ على الطابع النجدي التاريخي ودمجه مع حلول لاندسكيب حديثة ومستدامة."
-              pic="/images/proj-1.png"
-            />
-
-            <ProjectCard
-              categoryName="أعمال اللاندسكيب"
-              locale={locale}
-              id={1}
-              name="مشروع ديرعية جيت – هيئة تطوير بوابة الدرعية"
-              description="تنفيذ أعمال تنسيق المواقع ضمن واحد من أهم المشاريع التراثية والسياحية في المملكة، مع الحفاظ على الطابع النجدي التاريخي ودمجه مع حلول لاندسكيب حديثة ومستدامة."
-              pic="/images/proj-1.png"
-            />
-
-            <ProjectCard
-              categoryName="أعمال اللاندسكيب"
-              locale={locale}
-              id={1}
-              name="مشروع ديرعية جيت – هيئة تطوير بوابة الدرعية"
-              description="تنفيذ أعمال تنسيق المواقع ضمن واحد من أهم المشاريع التراثية والسياحية في المملكة، مع الحفاظ على الطابع النجدي التاريخي ودمجه مع حلول لاندسكيب حديثة ومستدامة."
-              pic="/images/proj-1.png"
-            />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {projects.map((item) => (
+              <ProjectCard
+                key={item.id}
+                categoryName={item.category}
+                id={item.id}
+                name={item.title}
+                description={item.description}
+                pic={item.image}
+                locale={locale}
+              />
+            ))}
           </div>
-          <div className="mt-[50px] mb-[150px]">
-            <Pagination
-              currentPage={1}
-              totalPages={5}
-              basePath={`/${locale}/projects`}
-            />
-          </div>
+
+          {totalPages > 1 && (
+            <div className="mb-[150px] mt-[50px]">
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                basePath={`/${locale}/projects`}
+              />
+            </div>
+          )}
         </div>
       </section>
     </>

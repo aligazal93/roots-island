@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import AchievementsCounter from "./AchievementsCounter ";
 
-function Counter({ target, start, suffix = "+" }) {
+function Counter({ target, start, suffix = "" }) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -35,20 +34,14 @@ function Counter({ target, start, suffix = "+" }) {
   );
 }
 
-export default function Achievments() {
+export default function Achievments({ data }) {
   const [startCounter, setStartCounter] = useState(false);
   const sectionRef = useRef(null);
 
-  const stats = [
-    { number: 250, title: "مشروع منجز" },
-    { number: 25, title: "عامًا من الخبرة" },
-    { number: 15, title: "مدينة سعودية" },
-    { number: 120, title: "متخصص وفني" },
-  ];
+  const stats = Array.isArray(data) ? data : data?.data || [];
 
   useEffect(() => {
     const section = sectionRef.current;
-
     if (!section) return;
 
     const observer = new IntersectionObserver(
@@ -84,7 +77,30 @@ export default function Achievments() {
           </p>
         </div>
 
-        <AchievementsCounter />
+        <div className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {stats.map((item, index) => {
+            const numberText = String(item.number || "0");
+            const target = Number(numberText.replace(/\D/g, "")) || 0;
+            const suffix = numberText.includes("+") ? "+" : "";
+
+            return (
+              <div
+                key={index}
+                className="rounded-[22px] border border-gray-100 bg-white p-6 text-center shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-xl"
+              >
+                <Counter
+                  target={target}
+                  start={startCounter}
+                  suffix={suffix}
+                />
+
+                <p className="text-custom14 font-bold leading-7 text-secondary md:text-custom16">
+                  {item.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

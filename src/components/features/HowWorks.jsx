@@ -1,28 +1,29 @@
-import Steps from '@/components/features/Steps'
-import React from 'react'
+import Steps from "@/components/features/Steps";
+import React from "react";
 
-export default function HowWorks() {
+export default function HowWorks({ data }) {
+  const steps = Array.isArray(data) ? data : data?.data || [];
+
   return (
-          <section className="py-[50px] bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-[700px] mx-auto mb-[70px]">
-            <span className="inline-flex items-center justify-center px-5 h-[36px] rounded-full bg-[#E8F3E5] text-primary text-[14px] font-[500] mb-5">
-              كيف نعمل
-            </span>
+    <section className="bg-white py-[50px]">
+      <div className="container mx-auto px-4">
+        <div className="mx-auto mb-[70px] max-w-[700px] text-center">
+          <span className="mb-5 inline-flex h-[36px] items-center justify-center rounded-full bg-[#E8F3E5] px-5 text-[14px] font-[500] text-primary">
+            كيف نعمل
+          </span>
 
-            <h2 className="text-custom28 leading-[1.4] font-[700] text-[#0B2E2F] mb-5">
-              كيف نحول الرؤية إلى واقع
-            </h2>
+          <h2 className="mb-5 text-custom28 font-[700] leading-[1.4] text-[#0B2E2F]">
+            كيف نحول الرؤية إلى واقع
+          </h2>
 
-            <p className="text-blackGrey text-[17px] leading-[1.9]">
-              من دراسة الموقع وحتى التسليم النهائي، يعمل فريقنا بخطة كاملة
-              لتقديم حلول خارجية متكاملة تحقق رؤية العميل بأعلى المعايير
-              الهندسية.
-            </p>
-          </div>
-
-          <Steps />
+          <p className="text-[17px] leading-[1.9] text-blackGrey">
+            من دراسة الموقع وحتى التسليم النهائي، يعمل فريقنا بخطة كاملة لتقديم
+            حلول خارجية متكاملة تحقق رؤية العميل بأعلى المعايير الهندسية.
+          </p>
         </div>
-      </section>
-  )
+
+        <Steps data={steps} />
+      </div>
+    </section>
+  );
 }

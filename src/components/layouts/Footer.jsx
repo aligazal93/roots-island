@@ -11,16 +11,22 @@ import {
 import { RiTwitterXFill } from "react-icons/ri";
 import AnimatedDiv from "../AnimateDiv";
 import { useSettings } from "@/hooks/settings";
+import { useServices } from "@/hooks/main-content/services";
+import LoadingCard from "./LoadingCard";
 
 export default function Footer({ locale }) {
   const currentLocale = locale || "ar";
   const { data, isLoading, error, refetch } = useSettings(locale);
+  const {data:servicesData, servicesIsLoading} = useServices(locale);
   {
     error && (
       <ErrorState message={error.message} onRetry={refetch} locale={locale} />
     );
   }
 
+  if (servicesIsLoading) {
+    return <LoadingCard />;
+  }
   return (
     <footer className="mt-[-100px] bg-darkBorder pb-[15px] pt-[150px]">
       <div className="container">
@@ -95,7 +101,7 @@ export default function Footer({ locale }) {
 
           <div>
             <h2 className="mb-3 text-custom16 font-[700] text-primary">
-              روابط تهمك
+              روابط تهمك 
             </h2>
 
             <ul className="space-y-3">
@@ -123,35 +129,22 @@ export default function Footer({ locale }) {
             </h2>
 
             <ul className="space-y-3">
-              {[
-                { title: "جميع خدماتنا", href: `/${currentLocale}/services` },
-                {
-                  title: "حلول الهاردسكيب المتكاملة",
-                  href: `/${currentLocale}/services/1`,
-                },
-                {
-                  title: "تنسيق المساحات الخضراء",
-                  href: `/${currentLocale}/services/2`,
-                },
-                {
-                  title: "الشلالات والنوافير",
-                  href: `/${currentLocale}/services/3`,
-                },
-                {
-                  title: "العناصر المائية والمشاتل",
-                  href: `/${currentLocale}/services/4`,
-                },
-              ].map((item) => (
-                <li key={item.title}>
+
+            {servicesData?.data?.map((service , index) => {
+              return (
+                <li key={service.title}>
                   <Link
-                    href={item.href}
+                    href={`/${currentLocale}/services/${index + 1}`}
                     className="text-custom14 font-[700] text-white transition hover:text-primary"
                   >
-                    {item.title}
+                    {service.title}
                   </Link>
                 </li>
-              ))}
+              )
+            })}
+
             </ul>
+
           </div>
 
           <div>

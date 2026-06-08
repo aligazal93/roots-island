@@ -75,7 +75,7 @@ export default function Projects({ locale }) {
                 />
                 <Link
                   className="text-custom24 px-4 h-auto lg:h-[60px] overflow-hidden py-4 block font-bold text-white"
-                  href="/"
+                  href={`/projects/${project.id}`}
                 >
                   {project.title}
                 </Link>
