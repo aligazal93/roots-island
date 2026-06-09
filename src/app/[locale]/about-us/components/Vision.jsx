@@ -1,63 +1,45 @@
 import AnimatedDiv from "@/components/AnimateDiv";
+import { getDictionary } from "@/utils/getDictionary";
 import Image from "next/image";
-import React from "react";
-import { FaAd, FaEye, FaRegCommentDots } from "react-icons/fa";
 
-export default function VisionMission({ data }) {
-  console.log("ali");
-  console.log(data);
+export default function VisionMission({ data, locale }) {
+  const dict = getDictionary(locale);
+  const vision = data?.vision;
+  const mission = data?.mission;
+  console.log(vision)
+  console.log(locale)
+  const items = [vision, mission].filter(Boolean);
 
   return (
     <div className="container">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-        <AnimatedDiv delay={0.5}>
-          <div className="group rounded-[20px] border border-gray-100 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-xl motion-safe:animate-[fadeUp_.8s_ease_both]">
-            <div className="flex items-center justify-between gap-5">
-              <Image
-                src={data?.vision?.image || ""}
-                alt={data?.vision?.title || ""}
-                width={58}
-                height={58}
-                className="rounded-2xl"
-              />
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {items.map((item, index) => (
+          <AnimatedDiv key={index} delay={0.5 + index * 0.2}>
+            <div className="group h-full rounded-[20px] border border-gray-100 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-xl">
+              <div className="flex items-start gap-5">
+                {item?.image && (
+                  <Image
+                    src={item.image}
+                    alt={item?.title || "icon"}
+                    width={58}
+                    height={58}
+                    className="rounded-2xl object-contain"
+                  />
+                )}
 
-              <div className="text-right">
-                <h3 className="mb-3 text-custom20 font-bold text-secondary">
-                  {data?.vision?.title || ""}
-                </h3>
+                <div className={locale === "en" ? "text-left" : "text-right"}>
+                  <h3 className="mb-3 text-custom20 font-bold text-secondary">
+                    {item?.title}
+                  </h3>
 
-                <p className="text-custom14 font-medium leading-8 text-blackGrey">
-                  {data?.vision?.description || ""}
-                  
-                </p>
+                  <p className="text-custom14 font-medium leading-8 text-blackGrey">
+                    {item?.description}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </AnimatedDiv>
-                <AnimatedDiv delay={0.5}>
-          <div className="group rounded-[20px] border border-gray-100 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-xl motion-safe:animate-[fadeUp_.8s_ease_both]">
-            <div className="flex items-center justify-between gap-5">
-              <Image
-                src={data?.mission?.image || ""}
-                alt={data?.mission?.title || ""}
-                width={58}
-                height={58}
-                className="rounded-2xl"
-              />
-
-              <div className="text-right">
-                <h3 className="mb-3 text-custom20 font-bold text-secondary">
-                  {data?.mission?.title || ""}
-                </h3>
-
-                <p className="text-custom14 font-medium leading-8 text-blackGrey">
-                  {data?.mission?.description || ""}
-                  
-                </p>
-              </div>
-            </div>
-          </div>
-        </AnimatedDiv>
+          </AnimatedDiv>
+        ))}
       </div>
     </div>
   );

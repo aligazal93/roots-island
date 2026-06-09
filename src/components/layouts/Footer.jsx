@@ -13,9 +13,11 @@ import AnimatedDiv from "../AnimateDiv";
 import { useSettings } from "@/hooks/settings";
 import { useServices } from "@/hooks/main-content/services";
 import LoadingCard from "./LoadingCard";
+import { getDictionary } from "@/utils/getDictionary";
 
 export default function Footer({ locale }) {
   const currentLocale = locale || "ar";
+  const dict = getDictionary(locale);
   const { data, isLoading, error, refetch } = useSettings(locale);
   const {data:servicesData, servicesIsLoading} = useServices(locale);
   {
@@ -101,15 +103,15 @@ export default function Footer({ locale }) {
 
           <div>
             <h2 className="mb-3 text-custom16 font-[700] text-primary">
-              روابط تهمك 
+             {dict?.importantLinks}
             </h2>
 
             <ul className="space-y-3">
               {[
-                { title: "الرئيسية", href: `/${currentLocale}` },
-                { title: "مشاريعنا", href: `/${currentLocale}/projects` },
-                { title: "من نحن", href: `/${currentLocale}/about-us` },
-                { title: "اتصل بنا", href: `/${currentLocale}/contact-us` },
+                { title: dict?.home, href: `/${currentLocale}` },
+                { title: dict?.projects, href: `/${currentLocale}/projects` },
+                { title: dict?.about, href: `/${currentLocale}/about-us` },
+                { title: dict?.contactUs, href: `/${currentLocale}/contact-us` },
               ].map((item) => (
                 <li key={item.title}>
                   <Link
@@ -125,7 +127,7 @@ export default function Footer({ locale }) {
 
           <div>
             <h2 className="mb-3 text-custom16 font-[700] text-primary">
-              خدماتنا
+              {dict?.ourServices}
             </h2>
 
             <ul className="space-y-3">
@@ -149,7 +151,7 @@ export default function Footer({ locale }) {
 
           <div>
             <h2 className="mb-3 text-custom16 font-[700] text-primary">
-              تواصل معنا
+            {dict?.contactUs}
             </h2>
 
             <ul className="space-y-3">
@@ -219,7 +221,7 @@ export default function Footer({ locale }) {
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-primary/10 pt-5 text-center md:flex-row">
           <h4 className="text-custom14 font-[700] text-white">
-            شركة روتس لاندسكيب . جميع الحقوق محفوظة.
+            {dict?.copyright}
           </h4>
 
           <ul className="flex items-center gap-4">
@@ -228,7 +230,7 @@ export default function Footer({ locale }) {
                 href={`/${currentLocale}/privacy-policy`}
                 className="text-custom14 font-[500] text-white transition hover:text-primary"
               >
-                سياسة الخصوصية
+               {dict?.privacyPolicy}
               </Link>
             </li>
 
@@ -237,7 +239,7 @@ export default function Footer({ locale }) {
                 href={`/${currentLocale}/terms`}
                 className="text-custom14 font-[500] text-white transition hover:text-primary"
               >
-                الشروط والأحكام
+               {dict?.termsConditions}
               </Link>
             </li>
           </ul>

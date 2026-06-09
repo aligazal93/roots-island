@@ -1,9 +1,10 @@
 import AnimatedDiv from "@/components/AnimateDiv";
+import { getDictionary } from "@/utils/getDictionary";
 import Image from "next/image";
 
-export default function OurValues({ data }) {
+export default function OurValues({ data , locale }) {
   const values = Array.isArray(data) ? data : data?.data || data?.values || [];
-
+  const dict = getDictionary(locale);
   return (
     <div className="container">
       <div className="grid grid-cols-12 gap-4">
@@ -11,17 +12,15 @@ export default function OurValues({ data }) {
           <AnimatedDiv delay={1}>
             <div className="mx-auto mt-12 max-w-3xl text-center">
               <span className="mb-4 inline-flex rounded-full bg-primary/10 px-5 py-2 text-custom13 font-bold text-primary">
-                قيمنا
+                {dict?.valuesTitle}
               </span>
 
               <h2 className="mb-4 text-custom24 font-bold text-secondary md:text-custom32">
-                قيمنا التي نبني بها نجاحنا
+               {dict?.valuesHeading}
               </h2>
 
               <p className="mx-auto max-w-2xl text-custom15 font-medium leading-8 text-blackGrey">
-                نعتمد على مجموعة من القيم الأساسية التي تشكل أساس قوتنا وتوجه
-                طريقة عملنا، لنقدم حلولاً تجمع بين الجودة، الابتكار، والالتزام
-                الحقيقي تجاه عملائنا.
+                {dict?.valuesDescription}
               </p>
             </div>
           </AnimatedDiv>

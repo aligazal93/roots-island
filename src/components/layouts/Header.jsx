@@ -77,7 +77,7 @@ export default function Header({ locale }) {
                   <FaAngleDown className="text-[14px] transition-transform duration-300 group-hover:rotate-180" />
                 </button>
 
-                <div className="absolute top-[40px] right-[-80px] min-w-[350px] opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                <div className={`${locale === "en" ? "left-[-80px]" : "right-[-80px]"} absolute  top-[40px]  min-w-[350px] opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300`}>
                   <div className="bg-white rounded-[10px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-[#F1F1F1] overflow-hidden py-0">
                     {servicesData?.data?.map((item) => (
                       <Link

@@ -17,7 +17,7 @@ export default function Services({ locale }) {
     if(error) return <ErrorState />;
   
   return (
-    <section className="bg-white pb-[50px]" dir="rtl">
+    <section className="bg-white pb-[50px]" id="services" >
       <div className="container mx-auto px-4">
         <div className="mb-12 text-center">
           <span className="mb-4 inline-block rounded-full bg-[#569E49]/20 px-6 py-2 text-custom12 font-bold text-[#569E49]">
@@ -36,7 +36,6 @@ export default function Services({ locale }) {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {data?.data?.map(( service ) => (
             <AnimatedDiv delay={0.2} key={service.id}>
-              
             <div className="overflow-hidden rounded-[18px] bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
               <Link href={`/services/${service.id}`}>
               <Image
@@ -48,7 +47,7 @@ export default function Services({ locale }) {
                 className="h-[160px] w-full object-cover"
               />
               <div className="p-6 text-center">
-                <h3 className="mb-1 text-custom16 md:text-custom20 lg:text-custom20 h-auto lg:h-[34px] overflow-hidden text-start font-bold leading-relaxed text-[#569E49]">
+                <h3 className="mb-1 text-custom16 md:text-custom20 lg:text-custom20 h-auto lg:h-[64px] overflow-hidden text-start font-bold leading-relaxed text-[#569E49]">
                   {service.title}
                 </h3>
                 <p className="text-custom14 text-start font-[500] leading-relaxed text-blackGrey line-clamp-3">

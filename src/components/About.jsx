@@ -14,13 +14,13 @@ export default function About({ locale }) {
   if (isLoading) return <LoadingCard />;
   if (error) return <ErrorState />;
   return (
-    <section className="relative overflow-hidden py-24" dir="rtl">
+    <section className="relative overflow-hidden py-24" dir={locale}>
       <div className="container mx-auto px-4">
         <div className="grid items-center gap-18 lg:grid-cols-2">
           <div>
             <AnimatedDiv delay={0.5}>
               <span className="mb-5 inline-block rounded-full bg-[#569E49]/15 px-5 py-2 text-sm font-bold text-[#569E49]">
-                من نحن
+                {dict?.aboutUsTitle}
               </span>
             </AnimatedDiv>
 

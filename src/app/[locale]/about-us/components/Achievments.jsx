@@ -1,5 +1,6 @@
 "use client";
 
+import { getDictionary } from "@/utils/getDictionary";
 import React, { useEffect, useRef, useState } from "react";
 
 function Counter({ target, start, suffix = "" }) {
@@ -34,9 +35,10 @@ function Counter({ target, start, suffix = "" }) {
   );
 }
 
-export default function Achievments({ data }) {
+export default function Achievments({ data, locale }) {
   const [startCounter, setStartCounter] = useState(false);
   const sectionRef = useRef(null);
+  const dict = getDictionary(locale);
 
   const stats = Array.isArray(data) ? data : data?.data || [];
 
@@ -64,16 +66,15 @@ export default function Achievments({ data }) {
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
           <span className="mb-4 inline-flex rounded-full bg-primary/10 px-5 py-2 text-custom13 font-bold text-primary">
-            إنجازاتنا
+            {dict?.achievementsTitle}
           </span>
 
           <h2 className="mb-4 text-custom24 font-bold text-secondary md:text-custom32">
-            إنجازاتنا في أرقام
+            {dict?.achievementsHeading}
           </h2>
 
           <p className="mx-auto max-w-2xl text-custom15 font-medium leading-8 text-blackGrey">
-            رقم صناعة اللاندسكيب نعمل بخطوات ثابتة لبناء حلول خارجية احترافية
-            وتجارب تنفيذ موثوقة لعملائنا.
+            {dict?.achievementsDescription}
           </p>
         </div>
 

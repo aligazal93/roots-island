@@ -9,29 +9,30 @@ import { getMainAboutUs } from "@/hooks/about-us/main-content";
 import { getValues } from "@/hooks/about-us/values";
 import { getAchievementsValues } from "@/hooks/about-us/achievements";
 import { getHowWorksData, howWorks } from "@/hooks/about-us/howWorks";
+import { getDictionary } from "@/utils/getDictionary";
 export default async function AboutUs({ params }) {
   const { locale } = await params;
   const mainAboutUs = await getMainAboutUs();
   const ourValues = await getValues();
   const achievements = await getAchievementsValues();
   const howWorks = await getHowWorksData();
+  const dict = getDictionary(locale);
 
   return (
     <>
       <HeaderPage locale={locale} />
       <Road
-        name="من نحن"
+        name={dict?.aboutUsTitle}
         items={[
-          { label: "الرئيسية", href: `/${locale}` },
-          { label: "من نحن", href: `/${locale}/projects` },
+          { label: dict?.home, href: `/${locale}` },
+          { label: dict?.aboutUsTitle, href: `/${locale}/about-us` },
         ]}
       />
-      <About  />
-
-        <VisionMission data={mainAboutUs.data} />
-        <OurValues data={ourValues} />
-        <Achievments data={achievements} />
-        <HowWorks data={howWorks} />
+        <About  locale={locale} />
+        <VisionMission data={mainAboutUs.data} locale={locale} />
+        <OurValues data={ourValues} locale={locale} />
+        <Achievments data={achievements} locale={locale} />
+        <HowWorks data={howWorks} locale={locale} />
 
     </>
   );
